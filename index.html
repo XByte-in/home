@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
-    <title>Dynamic Grid with Fixed Header</title>
+    <title>Play@XByte</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,80 +14,112 @@
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.95);
             color: #fff;
-            padding: 10px;
+            height: 64px;
             position: fixed;
             top: 0;
             width: 100%;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
         }
 
         h2 {
             margin: 0;
+            text-align: center;
+            vertical-align: middle;
+            padding: 15px;
         }
 
         .grid-container {
+            /* background-color: rgba(29, 28, 30, 0.95); */
+            width: calc(100% - 40px);
+            height: calc(100% - 64px);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
             padding: 20px;
-            margin-top: 70px;
+            margin-top: 64px;
+            background-image: url('./images/xbyte/logo_64x64.png');
+            /* width: 100%; */
+            background-size: auto;
+            background-repeat: round;
+            background-attachment: fixed;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* height: 100%; */
+            background-position: center;
+            background-blend-mode: darken;
         }
 
         .grid-item {
-            border: 1px solid #ccc;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-            padding: 10px;
+            /* border: 1px solid #ccc; */
+            /* box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3); */
+            /* padding: 10px; */
             text-align: center;
         }
 
         .grid-item img {
             width: 100%;
             height: auto;
-            border: 1px solid #ccc;
+            /* border: 1px solid #ccc; */
         }
+        .grid-item img:hover {
+            opacity: 1;
+            transform: scale(1.01);
+        } 
     </style>
 </head>
 
 <body>
     <header>
-        <h2>Semi-Transparent Fixed Header</h2>
+        <img src="./images/xbyte/logo_128x128.png" alt="XByte">
+        <h2>Tap2Play</h2>
     </header>
     <div class="grid-container" id="gridContainer">
         <!-- The grid items will be added here dynamically -->
     </div>
 
     <script>
-        const imagesData = [
-            { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" },
-            { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-            { src: "image2.jpg", alt: "Image 2", description: "Item 2" },
-            // Add more objects as needed
-        ];
 
-        const gridContainer = document.getElementById("gridContainer");
+        fetch('games.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (games) {
+                games.forEach(data => {
+                    appendData(data);
+                });
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        // const imagesData = [
+        //     { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" },
+        //     { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
+        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" },
+        //     // Add more objects as needed
+        // ];
 
-        imagesData.forEach(data => {
+
+        function appendData(data) {
             const gridItem = document.createElement("div");
             gridItem.className = "grid-item";
-            gridItem.innerHTML = `
-        <img src="${data.src}" alt="${data.alt}">
-        <p>${data.description}</p>
-      `;
+            gridItem.innerHTML = `<img src="${data.tile}" alt="${data.title}">`;
             gridContainer.appendChild(gridItem);
-        });
+        }
     </script>
 </body>
 
