@@ -14,7 +14,7 @@
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 1);
             color: #fff;
             height: 64px;
             position: fixed;
@@ -23,6 +23,7 @@
             display: flex;
             flex-direction: row;
             box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1;
         }
 
         h2 {
@@ -33,23 +34,25 @@
         }
 
         .grid-container {
-            /* background-color: rgba(29, 28, 30, 0.95); */
-            width: calc(100% - 40px);
-            height: calc(100% - 64px);
+            overflow: auto;
+            width: calc(100vw - 40px);
+            height: calc(100vh - 64px);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
             padding: 20px;
             margin-top: 64px;
-            background-image: url('./images/xbyte/logo_64x64.png');
-            /* width: 100%; */
+
+            background-color: rgba(0, 0, 0, 1);
+            background-image: url('./images/xbyte/logo_1024x1024_invert.png');
             background-size: auto;
             background-repeat: round;
             background-attachment: fixed;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* height: 100%; */
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-color: rgba(0, 0, 0, 0.5); */
             background-position: center;
-            background-blend-mode: darken;
+            background-blend-mode: hard-light;
         }
 
         .grid-item {
@@ -57,17 +60,23 @@
             /* box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3); */
             /* padding: 10px; */
             text-align: center;
+            opacity: 0.8;
         }
 
+        .grid-item:hover {
+            opacity: 1;
+        }
         .grid-item img {
             width: 100%;
             height: auto;
             /* border: 1px solid #ccc; */
         }
         .grid-item img:hover {
-            opacity: 1;
-            transform: scale(1.01);
-        } 
+            transform: scale(1.1);
+
+            /* border: 1px solid #ccc; */
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 
