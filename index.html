@@ -90,38 +90,10 @@
     </div>
 
     <script>
-
         fetch('games.json')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (games) {
-                games.forEach(data => {
-                    appendData(data);
-                });
-            })
-            .catch(function (err) {
-                console.log('error: ' + err);
-            });
-        // const imagesData = [
-        //     { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" },
-        //     { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" }, { src: "image1.jpg", alt: "Image 1", description: "Item 1" },
-        //     { src: "image2.jpg", alt: "Image 2", description: "Item 2" },
-        //     // Add more objects as needed
-        // ];
-
+            .then(response => response.json())
+            .then(games => games.forEach(appendData))
+            .catch(err => console.log('Error: ' + err));
 
         function appendData(data) {
             const gridItem = document.createElement("div");
