@@ -98,6 +98,12 @@
             const gridItem = document.createElement("div");
             gridItem.className = "grid-item";
             gridItem.innerHTML = `<img src="${data.tile}" alt="${data.title}">`;
+            gridItem.addEventListener("click", () => {
+                const searchParams = new URLSearchParams(window.location.search);
+                searchParams.set("game_url", encodeURIComponent(data.url));
+                console.log(searchParams.get("game_url"));
+                window.location.href = `${window.location.origin}${window.location.pathname}?${searchParams.toString()}`;
+            });
             gridContainer.appendChild(gridItem);
         }
     </script>
