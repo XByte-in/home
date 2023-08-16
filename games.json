@@ -1,13 +1,8 @@
 [
     {
-        "title": "Olko-2",
-        "url": "https://cdn.htmlgames.com/Olko2/",
-        "tile": "./images/games/olko-2.webp"
-    },
-    {
-        "title": "Flower Merge",
-        "url": "https://cdn.htmlgames.com/FlowerMerge/",
-        "tile": "./images/games/flower-merge.webp"
+        "title": "Airport Sniper",
+        "url": "https://cdn.htmlgames.com/AirportSniper/",
+        "tile": "./images/games/airportsniper.webp"
     },
     {
         "title": "Daily Tairupeinto",
@@ -15,8 +10,38 @@
         "tile": "./images/games/daily-tairupeinto.webp"
     },
     {
+        "title": "Endless dimensions",
+        "url": "https://cdn.htmlgames.com/Endlessdimensions/",
+        "tile": "./images/games/endless-dimensions.webp"
+    },
+    {
+        "title": "Flower Merge",
+        "url": "https://cdn.htmlgames.com/FlowerMerge/",
+        "tile": "./images/games/flower-merge.webp"
+    },
+    {
+        "title": "Fruit Bubble",
+        "url": "https://cdn.htmlgames.com/FruitBubble/",
+        "tile": "./images/games/fruitbubble.webp"
+    },
+    {
+        "title": "London Hidden Objects",
+        "url": "https://cdn.htmlgames.com/LondonHiddenObjects/",
+        "tile": "./images/games/londonhiddenobjects.webp"
+    },
+    {
+        "title": "Olko-2",
+        "url": "https://cdn.htmlgames.com/Olko2/",
+        "tile": "./images/games/olko-2.webp"
+    },
+    {
         "title": "Rotris",
         "url": "https://cdn.htmlgames.com/Rotris/",
         "tile": "./images/games/rotris.webp"
+    },
+    {
+        "title": "Squirrel Connection",
+        "url": "https://cdn.htmlgames.com/SquirrelConnection/",
+        "tile": "./images/games/squirrelconnection.webp"
     }
 ]
