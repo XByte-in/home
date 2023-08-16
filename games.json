@@ -1,8 +1,22 @@
 [
     {
-        "title":"Olko-2",
-        "description":"Olko-2",
-        "url":"https://cdn.htmlgames.com/Olko2/",
-        "tile":"./images/games/olko-2.jpg"
+        "title": "Olko-2",
+        "url": "https://cdn.htmlgames.com/Olko2/",
+        "tile": "./images/games/olko-2.webp"
+    },
+    {
+        "title": "Flower Merge",
+        "url": "https://cdn.htmlgames.com/FlowerMerge/",
+        "tile": "./images/games/flower-merge.webp"
+    },
+    {
+        "title": "Daily Tairupeinto",
+        "url": "https://cdn.htmlgames.com/DailyTairupeinto/",
+        "tile": "./images/games/daily-tairupeinto.webp"
+    },
+    {
+        "title": "Rotris",
+        "url": "https://cdn.htmlgames.com/Rotris/",
+        "tile": "./images/games/rotris.webp"
     }
 ]
