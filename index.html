@@ -25,48 +25,31 @@
             width: 100%;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            height: 48px;
             box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.1);
             z-index: 1;
         }
-        .header-left{
-            height: 48px;
-            display: flex;
-            flex-direction: row;
-        }
         h1 {
-            margin: 0;
+            margin: auto 6px;
             text-align: center;
             vertical-align: middle;
-            padding: 4px 0 0 16px;
-        }
-
-        h7 {
-            margin: 0;
-            text-align: center;
-            vertical-align: middle;
-            padding: 20px 0 0 2px;
         }
 
         input {
-            max-width: 300px;
-            width: 300px;
-            min-width: 100px;
             height: 32px;
-            margin: auto 4px auto 5px;
+            margin: auto 6px;
             background: black;
             color: white;
             padding: 0px 10px;
-            border:none
+            border:none;
+            width: calc(100vw - 160px);
         }
         ul {
-            max-width: 300px !important;
-            width: 300px !important;
-            min-width: 100px !important;
             background: black !important;
             color: white !important;
             max-height: calc(100vh - 48px) !important;
             overflow: auto;
+            font-size: 12px !important;
         }
         .grid-container {
             overflow: auto;
@@ -105,11 +88,8 @@
 
 <body>
     <header>
-        <div class="header-left">
             <img class="logo" src="./images/xbyte/logo_128x128.png" alt="XByte">
-            <h1>Tap2Play</h1>
-            <h7>XByte.in</h7>
-        </div>
+            <h1>XByte.in</h1>
         <input class="search" type="text" id="autocomplete-input" placeholder="Search">
     </header>
     <div class="grid-container" id="gridContainer">
