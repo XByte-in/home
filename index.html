@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <title>Play@XByte</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -108,9 +106,21 @@
             }
         }
     </style>
+    <title>Play@XByte</title>
 </head>
 
 <body>
+    <header>
+        <img class="logo" src="./images/xbyte/logo_128x128.png" alt="XByte">
+        <h1>XByte.in</h1>
+        <input class="search" type="text" id="autocomplete-input" placeholder="Search">
+    </header>
+    <div class="grid-container" id="gridContainer">
+        <!-- The grid items will be added here dynamically -->
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" defer></script>
     <script>
         let allGames = [];
 
@@ -177,17 +187,6 @@
             gridContainer.appendChild(gridItem);
         }
     </script>
-    <header>
-        <img class="logo" src="./images/xbyte/logo_128x128.png" alt="XByte" onclick="{
-            window.location.href = window.location.origin + window.location.pathname;
-        }">
-        <h1>XByte.in</h1>
-        <input class="search" type="text" id="autocomplete-input" placeholder="Search" onkeydown="onSearch(event)">
-    </header>
-    <div class="grid-container" id="gridContainer">
-        <!-- The grid items will be added here dynamically -->
-    </div>
-
 </body>
 
 </html>
