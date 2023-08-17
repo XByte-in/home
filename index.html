@@ -32,15 +32,20 @@
 
         header img {
             cursor: pointer;
+            margin: 12px;
+            margin-right: 0px;
+            padding-right: 8px;
         }
 
         header h2 {
-            margin: auto 4px;
+            margin: auto 0px;
             text-align: center;
             vertical-align: middle;
+            cursor: pointer;
         }
 
         header input {
+            margin: auto 8px;
             border: none;
             border-radius: 16px;
             padding-left: 8px;
@@ -48,7 +53,6 @@
             background: rgba(15, 15, 15, 1);
             color: rgba(255, 255, 255, 1);
             height: 32px;
-            margin: auto 4px;
             width: calc(100vw - 160px);
             font-size: 20px;
         }
@@ -69,13 +73,13 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 12px;
 
             overflow: auto;
-            padding: 20px;
+            padding: 12px;
             margin-top: 48px;
-            width: calc(100vw - 40px);
-            height: calc(100vh - 88px);
+            width: calc(100vw - 24px);
+            height: calc(100vh - 72px);
 
             background-color: rgba(15, 15, 15, 1);
             background-attachment: fixed;
@@ -101,9 +105,13 @@
             cursor: pointer;
             transform: scale(1.2);
             box-shadow: 0px 0px 2px 2px rgba(127, 127, 127, 0.5);
+            border: 1px solid rgba(255, 255, 255, 1);
         }
+
         @media only screen and (max-width: 550px) {
-            .grid-container {grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));}
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
         }
 
         @media only screen and (max-width: 460px) {
@@ -116,7 +124,7 @@
             }
         }
     </style>
-    <title>Play@XByte</title>
+    <title>xByte.in</title>
 </head>
 
 <body>
@@ -177,17 +185,19 @@
             gridItem.className = "grid-item";
             gridItem.appendChild(imgItem);
             gridItem.addEventListener("click", () => {
-                // const searchParams = new URLSearchParams(window.location.search);
-                // searchParams.set("game_url", encodeURIComponent(data.url));
-                // console.log(searchParams.get("game_url"));
-                // window.location.href = `${window.location.origin}${window.location.pathname}?${searchParams.toString()}`;
+                const searchParams = new URLSearchParams(window.location.search);
+                searchParams.set("game_url", encodeURIComponent(data.url));
+                console.log(searchParams.get("game_url"));
+                window.location.href = `${window.location.origin}${window.location.pathname}?${searchParams.toString()}`;
             });
             gridContainer.appendChild(gridItem);
         }
     </script>
     <header>
-        <img src="./images/xbyte/logo_256.png" alt="XByte">
-        <h2>xByte.in</h2>
+        <img src="./images/xbyte/logo_256.png" alt="XByte" onclick="{
+            window.location.href = window.location.origin + window.location.pathname}">
+        <h2 onclick="{
+            window.location.href = window.location.origin + window.location.pathname}">xByte.in</h2>
         <input class="search" type="text" id="autocomplete-input" placeholder="Search" onkeyup="onSearch(event)">
     </header>
     <div class="grid-container" id="gridContainer">
