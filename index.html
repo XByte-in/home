@@ -16,60 +16,61 @@
         }
 
         header {
-            background-color: rgba(255, 215, 0, 1);
-            color: #fff;
+            display: flex;
+            flex-direction: row;
             position: fixed;
             top: 0;
             width: 100%;
-            display: flex;
-            flex-direction: row;
             height: 48px;
-            box-shadow: 2px 2px 2px 2px rgba(255, 215, 0, 0.5);
             z-index: 1;
+
+            background-color: rgba(0, 0, 0, 1);
+            color: rgba(255, 255, 255, 1);
         }
 
         header img {
             cursor: pointer;
         }
 
-        h1 {
-            margin: auto 6px;
+        header h2 {
+            margin: auto 4px;
             text-align: center;
             vertical-align: middle;
         }
 
-        input {
-            height: 32px;
-            margin: auto 6px;
-            background: #FFD700;
-            color: black;
+        header input {
             border: none;
+            border-radius: 16px;
+            padding-left: 8px;
+            padding-right: 8px;
+            background: rgba(15, 15, 15, 1);
+            color: rgba(255, 255, 255, 1);
+            height: 32px;
+            margin: auto 4px;
             width: calc(100vw - 160px);
-            padding-left: 10px;
-            padding-right: 10px;
             font-size: 20px;
         }
 
         ul {
-            background: black !important;
-            color: white !important;
-            max-height: calc(100vh - 48px) !important;
             overflow: auto;
-            font-size: 12px !important;
+            background: rgba(15, 15, 15, 1) !important;
+            color: rgba(255, 255, 255, 1) !important;
+            max-height: calc(100vh - 48px) !important;
+            font-size: 16px !important;
         }
 
         .grid-container {
-            overflow: auto;
-            width: calc(100vw - 40px);
-            height: calc(100vh - 88px);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            /* grid-template-rows: repeat(auto-fill, minmax(100px, 1fr)); */
             gap: 20px;
+
+            overflow: auto;
             padding: 20px;
             margin-top: 48px;
-            background-color: rgba(0, 0, 0, 1);
-            /* background-image: url('./images/xbyte/logo_1024x1024_invert.png'); */
+            width: calc(100vw - 40px);
+            height: calc(100vh - 88px);
+
+            background-color: rgba(15, 15, 15, 1);
             background-attachment: fixed;
             background-size: contain;
             background-repeat: no-repeat;
@@ -77,23 +78,22 @@
             background-blend-mode: hard-light;
         }
 
-        .grid-item {
+        .grid-container .grid-item {
             text-align: center;
         }
 
-        .grid-item img {
+        .grid-container .grid-item img {
             width: 100%;
             height: auto;
-            color: #fff;
-            border: 1px solid #FFD700;
+            color: rgba(255, 255, 255, 1);
             border-radius: 8px;
 
         }
 
-        .grid-item img:hover {
-            transform: scale(1.2);
-            box-shadow: 0px 0px 5px 5px rgba(255, 215, 0, 0.5);
+        .grid-container .grid-item img:hover {
             cursor: pointer;
+            transform: scale(1.2);
+            box-shadow: 0px 0px 5px 5px rgba(127, 127, 127, 0.5);
         }
 
         @media only screen and (max-width: 460px) {
@@ -111,8 +111,8 @@
 
 <body>
     <header>
-        <img class="logo" src="./images/xbyte/logo_128x128.png" alt="XByte">
-        <h1>XByte.in</h1>
+        <img src="./images/xbyte/logo_1024x1024_invert.png" alt="XByte">
+        <h2>XByte.in</h2>
         <input class="search" type="text" id="autocomplete-input" placeholder="Search">
     </header>
     <div class="grid-container" id="gridContainer">
