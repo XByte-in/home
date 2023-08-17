@@ -8,6 +8,8 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -115,17 +117,6 @@
 </head>
 
 <body>
-    <header>
-        <img src="./images/xbyte/logo_256.png" alt="XByte">
-        <h2>xByte.in</h2>
-        <input class="search" type="text" id="autocomplete-input" placeholder="Search">
-    </header>
-    <div class="grid-container" id="gridContainer">
-        <!-- The grid items will be added here dynamically -->
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" defer></script>
     <script>
         let allGames = [];
 
@@ -166,6 +157,7 @@
 
         let timeOutId = null;
         function onSearch(event) {
+            console.log(event);
             clearTimeout(timeOutId)
             timeOutId = setTimeout(() => setUpAutoComplete(event.target.value), 500);
         }
@@ -176,7 +168,6 @@
             imgItem.alt = data.name;
             imgItem.onerror = () => {
                 const gridItem = document.getElementById(data.name);
-                gridItem.style.backgroundColor = "Red";
                 gridItem.parentElement.removeChild(gridItem);
             }
             const gridItem = document.createElement("div");
@@ -184,14 +175,22 @@
             gridItem.className = "grid-item";
             gridItem.appendChild(imgItem);
             gridItem.addEventListener("click", () => {
-                const searchParams = new URLSearchParams(window.location.search);
-                searchParams.set("game_url", encodeURIComponent(data.url));
-                console.log(searchParams.get("game_url"));
-                window.location.href = `${window.location.origin}${window.location.pathname}?${searchParams.toString()}`;
+                // const searchParams = new URLSearchParams(window.location.search);
+                // searchParams.set("game_url", encodeURIComponent(data.url));
+                // console.log(searchParams.get("game_url"));
+                // window.location.href = `${window.location.origin}${window.location.pathname}?${searchParams.toString()}`;
             });
             gridContainer.appendChild(gridItem);
         }
     </script>
+    <header>
+        <img src="./images/xbyte/logo_256.png" alt="XByte">
+        <h2>xByte.in</h2>
+        <input class="search" type="text" id="autocomplete-input" placeholder="Search" onkeypress="onSearch(event)">
+    </header>
+    <div class="grid-container" id="gridContainer">
+        <!-- The grid items will be added here dynamically -->
+    </div>
 </body>
 
 </html>
