@@ -51,12 +51,17 @@
             font-size: 20px;
         }
 
+        header input:focus {
+            outline: none;
+        }
+
         ul {
             overflow: auto;
             background: rgba(15, 15, 15, 1) !important;
             color: rgba(255, 255, 255, 1) !important;
             max-height: calc(100vh - 48px) !important;
             font-size: 16px !important;
+            border: 1px solid rgba(0, 0, 0, 1) !important;
         }
 
         .grid-container {
@@ -111,8 +116,8 @@
 
 <body>
     <header>
-        <img src="./images/xbyte/logo_1024x1024_invert.png" alt="XByte">
-        <h2>XByte.in</h2>
+        <img src="./images/xbyte/logo_256.png" alt="XByte">
+        <h2>xByte.in</h2>
         <input class="search" type="text" id="autocomplete-input" placeholder="Search">
     </header>
     <div class="grid-container" id="gridContainer">
