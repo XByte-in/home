@@ -45,7 +45,6 @@
             margin: auto 6px;
             background: black;
             color: white;
-            padding: 0px 10px;
             border: none;
             width: calc(100vw - 160px);
         }
@@ -64,6 +63,7 @@
             height: calc(100vh - 88px);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            /* grid-template-rows: repeat(auto-fill, minmax(100px, 1fr)); */
             gap: 20px;
             padding: 20px;
             margin-top: 48px;
@@ -90,6 +90,15 @@
             transform: scale(1.2);
             box-shadow: 0px 0px 5px 5px rgba(255, 255, 255, 0.8);
             cursor: pointer;
+        }
+
+        @media only screen and (max-width: 460px) {
+            header h1 {
+               display: none;
+            }
+            header input{
+                width: calc(100vw - 40px);
+            }
         }
     </style>
 </head>
