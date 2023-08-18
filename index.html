@@ -80,12 +80,7 @@
             margin-top: 48px;
             width: calc(100vw - 24px);
             height: calc(100vh - 72px);
-            display: none;
-            /* background-attachment: fixed;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-blend-mode: hard-light; */
+            display: grid;
         }
 
         .grid-container .grid-item {
@@ -134,7 +129,6 @@
 <body>
     <script>
         const iframeAspectRatio = 5 / 3;
-        let mode = "view"
 
         function openFullscreen() {
             if (document.body.requestFullscreen) {
@@ -170,7 +164,6 @@
             }
         }
 
-        let allGames = [];
         function GetSortOrder(prop) {
             return function (a, b) {
                 if (a[prop] > b[prop]) {
@@ -194,59 +187,45 @@
             filteredGames.forEach(appendData);
 
         }
+
+        let allGames = [];
         window.onload = () => {
-            const searchParams = new URLSearchParams(window.location.search);
-            let gameUrl = searchParams.get("game_url");
-            if (gameUrl) {
-                mode = "play";
-                gameUrl = decodeURIComponent(gameUrl);
-            }
-            if (mode === "play") {
-                const gameElement = document.getElementById("game");
-                gameElement.src = gameUrl;
-                gameElement.style.display = "block";
-                updateIFramePosition();
-
-                window.addEventListener("resize", updateIFramePosition);
-
-            } else if (mode === "view") {
-                const gridContainer = document.getElementById("gridContainer");
-                gridContainer.style.display = "grid";
-            }
-
             fetch('games.json')
                 .then(response => response.json())
                 .then(games => {
                     allGames = games.sort(GetSortOrder("name"));
                     setUpAutoComplete("");
-                    if (mode === "play") {
-                        openFullscreen();
-                    } else {
-                        closeFullscreen()
-                    }
-
                 })
                 .catch(err => console.log('Error: ' + err));
         }
         let timeOutId = null;
         function onSearch(event) {
-            mode = "view";
-            window.history.pushState({}, "", window.location.origin + window.location.pathname);
+            stopGame();
+            clearTimeout(timeOutId)
+            timeOutId = setTimeout(() => setUpAutoComplete(event.target.value), 500);
+        }
 
+        function stopGame() {
             const gameElement = document.getElementById("game");
             gameElement.src = "";
             gameElement.style.display = "none";
 
             const gridContainer = document.getElementById("gridContainer");
             gridContainer.style.display = "grid";
-
-            clearTimeout(timeOutId)
-            timeOutId = setTimeout(() => {
-                closeFullscreen();
-                setUpAutoComplete(event.target.value), 500
-            });
+            closeFullscreen();
         }
 
+        function launchGame(data) {
+            const gridContainer = document.getElementById("gridContainer");
+            gridContainer.style.display = "none";
+
+            const gameElement = document.getElementById("game");
+            gameElement.src = data.url;
+            gameElement.style.display = "block";
+            updateIFramePosition();
+            window.addEventListener("resize", updateIFramePosition);
+            openFullscreen();
+        }
         function appendData(data) {
             const imgItem = document.createElement("img");
             imgItem.src = data.thumb3;
@@ -255,12 +234,7 @@
                 const gridItem = document.getElementById(data.name);
                 gridItem.parentElement.removeChild(gridItem);
             }
-            imgItem.addEventListener("click", () => {
-                const searchParams = new URLSearchParams(window.location.search);
-                searchParams.set("game_url", encodeURIComponent(data.url));
-                console.log(searchParams.get("game_url"));
-                window.location.href = `${window.location.origin}${window.location.pathname}?${searchParams.toString()}`;
-            });
+            imgItem.addEventListener("click", () => launchGame(data));
 
             const gridItem = document.createElement("div");
             gridItem.id = data.name
