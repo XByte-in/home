@@ -208,12 +208,10 @@
                 updateIFramePosition();
 
                 window.addEventListener("resize", updateIFramePosition);
-                openFullscreen()
 
             } else if (mode === "view") {
                 const gridContainer = document.getElementById("gridContainer");
                 gridContainer.style.display = "grid";
-                closeFullscreen()
             }
 
             fetch('games.json')
@@ -221,6 +219,11 @@
                 .then(games => {
                     allGames = games.sort(GetSortOrder("name"));
                     setUpAutoComplete("");
+                    if (mode === "play") {
+                        openFullscreen();
+                    } else {
+                        closeFullscreen()
+                    }
 
                 })
                 .catch(err => console.log('Error: ' + err));
@@ -238,7 +241,10 @@
             gridContainer.style.display = "grid";
 
             clearTimeout(timeOutId)
-            timeOutId = setTimeout(() => setUpAutoComplete(event.target.value), 500);
+            timeOutId = setTimeout(() => {
+                closeFullscreen();
+                setUpAutoComplete(event.target.value), 500
+            });
         }
 
         function appendData(data) {
