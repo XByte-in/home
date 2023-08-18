@@ -137,24 +137,24 @@
         let mode = "view"
 
         function openFullscreen() {
-            if (document.requestFullscreen) {
-                document.requestFullscreen();
-            } else if (document.webkitRequestFullscreen) { /* Safari */
-                document.webkitRequestFullscreen();
-            } else if (document.msRequestFullscreen) { /* IE11 */
-                document.msRequestFullscreen();
+            if (document.body.requestFullscreen) {
+                document.body.requestFullscreen();
+            } else if (document.body.webkitRequestFullscreen) { /* Safari */
+                document.body.webkitRequestFullscreen();
+            } else if (document.body.msRequestFullscreen) { /* IE11 */
+                document.body.msRequestFullscreen();
             }
         }
 
         function closeFullscreen() {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) { /* Safari */
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { /* IE11 */
-                    document.msExitFullscreen();
-                }
+            if (document.body.exitFullscreen) {
+                document.body.exitFullscreen();
+            } else if (document.body.webkitExitFullscreen) { /* Safari */
+                document.body.webkitExitFullscreen();
+            } else if (document.body.msExitFullscreen) { /* IE11 */
+                document.body.msExitFullscreen();
             }
+        }
 
         function updateIFramePosition() {
             const gameElement = document.getElementById("game");
@@ -202,15 +202,15 @@
                 gameUrl = decodeURIComponent(gameUrl);
             }
             if (mode === "play") {
-                openFullscreen(); 
+                openFullscreen();
                 const gameElement = document.getElementById("game");
                 gameElement.src = gameUrl;
                 gameElement.style.display = "block";
                 updateIFramePosition();
-                
+
                 window.addEventListener("resize", updateIFramePosition);
             } else if (mode === "view") {
-                closeFullscreen() 
+                closeFullscreen()
                 const gridContainer = document.getElementById("gridContainer");
                 gridContainer.style.display = "grid";
             }
@@ -226,7 +226,7 @@
         }
         let timeOutId = null;
         function onSearch(event) {
-            mode === "view";
+            mode = "view";
             window.history.pushState({}, "", window.location.origin + window.location.pathname);
 
             const gameElement = document.getElementById("game");
