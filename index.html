@@ -15,6 +15,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: rgba(15, 15, 15, 1);
         }
 
         header {
@@ -71,7 +72,6 @@
         }
 
         .grid-container {
-            display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 12px;
 
@@ -80,13 +80,12 @@
             margin-top: 48px;
             width: calc(100vw - 24px);
             height: calc(100vh - 72px);
-
-            background-color: rgba(15, 15, 15, 1);
-            background-attachment: fixed;
+            display: none;
+            /* background-attachment: fixed;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            background-blend-mode: hard-light;
+            background-blend-mode: hard-light; */
         }
 
         .grid-container .grid-item {
@@ -123,14 +122,34 @@
                 width: calc(100vw - 40px);
             }
         }
+
+        #game {
+            position: absolute;
+            display: none;
+        }
     </style>
     <title>xByte.in</title>
 </head>
 
 <body>
     <script>
-        let allGames = [];
+        const iframeAspectRatio = 5 / 3;
+        let mode = "view"
+        function updateIFramePosition() {
+            const gameElement = document.getElementById("game");
+            if (gameElement) {
+                const availableWidth = window.innerWidth;
+                const availableHeight = window.innerHeight - 48;
+                let height = Math.min(Math.floor(availableWidth / iframeAspectRatio), availableHeight);
+                let width = Math.floor(height * iframeAspectRatio, availableWidth);
+                gameElement.style.width = `${width}px`;
+                gameElement.style.height = `${height}px`;
+                gameElement.style.left = `${(availableWidth - width) / 2}px`;
+                gameElement.style.top = `${(availableHeight - height) / 2 + 48}px`;
+            }
+        }
 
+        let allGames = [];
         function GetSortOrder(prop) {
             return function (a, b) {
                 if (a[prop] > b[prop]) {
@@ -156,6 +175,23 @@
         }
 
         window.onload = () => {
+            const searchParams = new URLSearchParams(window.location.search);
+            let gameUrl = searchParams.get("game_url");
+            if (gameUrl) {
+                mode = "play";
+                gameUrl = decodeURIComponent(gameUrl);
+            }
+            if (mode === "play") {
+                const gameElement = document.getElementById("game");
+                gameElement.src = gameUrl;
+                gameElement.style.display = "block";
+                updateIFramePosition();
+                window.addEventListener("resize", updateIFramePosition);
+            } else if (mode === "view") {
+                const gridContainer = document.getElementById("gridContainer");
+                gridContainer.style.display = "grid";
+            }
+
             fetch('games.json')
                 .then(response => response.json())
                 .then(games => {
@@ -167,6 +203,17 @@
         }
         let timeOutId = null;
         function onSearch(event) {
+            window.history.pushState({}, "", window.location.origin + window.location.pathname);
+
+            const gameElement = document.getElementById("game");
+            gameElement.src = "";
+            gameElement.style.display = "none";
+
+            const gridContainer = document.getElementById("gridContainer");
+            gridContainer.style.display = "grid";
+
+
+
             clearTimeout(timeOutId)
             timeOutId = setTimeout(() => setUpAutoComplete(event.target.value), 500);
         }
@@ -179,16 +226,18 @@
                 const gridItem = document.getElementById(data.name);
                 gridItem.parentElement.removeChild(gridItem);
             }
-            const gridItem = document.createElement("div");
-            gridItem.id = data.name
-            gridItem.className = "grid-item";
-            gridItem.appendChild(imgItem);
-            gridItem.addEventListener("click", () => {
+            imgItem.addEventListener("click", () => {
                 const searchParams = new URLSearchParams(window.location.search);
                 searchParams.set("game_url", encodeURIComponent(data.url));
                 console.log(searchParams.get("game_url"));
                 window.location.href = `${window.location.origin}${window.location.pathname}?${searchParams.toString()}`;
             });
+
+            const gridItem = document.createElement("div");
+            gridItem.id = data.name
+            gridItem.className = "grid-item";
+            gridItem.appendChild(imgItem);
+
             gridContainer.appendChild(gridItem);
         }
     </script>
@@ -200,8 +249,9 @@
         <input class="search" type="text" id="autocomplete-input" placeholder="Search" onkeyup="onSearch(event)">
     </header>
     <div class="grid-container" id="gridContainer">
-        <!-- The grid items will be added here dynamically -->
     </div>
+
+    <embed id="game" src="https://cdn.htmlgames.com/Olko2/index.html" allowfullscreen></embed>
 </body>
 
 </html>
