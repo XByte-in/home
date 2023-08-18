@@ -172,13 +172,13 @@
 
         let allGames = [];
         function GetSortOrder(prop) {
-            function (a, b) {
+            return function (a, b) {
                 if (a[prop] > b[prop]) {
-                    1;
+                    return 1;
                 } else if (a[prop] < b[prop]) {
-                    -1;
+                    return -1;
                 }
-                0;
+                return 0;
             }
         }
 
