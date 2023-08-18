@@ -138,21 +138,21 @@
 
         function openFullscreen() {
             if (document.body.requestFullscreen) {
-                document.body.requestFullscreen();
+                return document.body.requestFullscreen();
             } else if (document.body.webkitRequestFullscreen) { /* Safari */
-                document.body.webkitRequestFullscreen();
+                return document.body.webkitRequestFullscreen();
             } else if (document.body.msRequestFullscreen) { /* IE11 */
-                document.body.msRequestFullscreen();
+                return document.body.msRequestFullscreen();
             }
         }
 
         function closeFullscreen() {
             if (document.body.exitFullscreen) {
-                document.body.exitFullscreen();
+                return document.body.exitFullscreen();
             } else if (document.body.webkitExitFullscreen) { /* Safari */
-                document.body.webkitExitFullscreen();
+                return document.body.webkitExitFullscreen();
             } else if (document.body.msExitFullscreen) { /* IE11 */
-                document.body.msExitFullscreen();
+                return document.body.msExitFullscreen();
             }
         }
 
@@ -202,17 +202,20 @@
                 gameUrl = decodeURIComponent(gameUrl);
             }
             if (mode === "play") {
-                openFullscreen();
-                const gameElement = document.getElementById("game");
-                gameElement.src = gameUrl;
-                gameElement.style.display = "block";
-                updateIFramePosition();
+                openFullscreen().then(() => {
+                    const gameElement = document.getElementById("game");
+                    gameElement.src = gameUrl;
+                    gameElement.style.display = "block";
+                    updateIFramePosition();
 
-                window.addEventListener("resize", updateIFramePosition);
+                    window.addEventListener("resize", updateIFramePosition);
+                });
+
             } else if (mode === "view") {
-                closeFullscreen()
-                const gridContainer = document.getElementById("gridContainer");
-                gridContainer.style.display = "grid";
+                closeFullscreen().then(() => {
+                    const gridContainer = document.getElementById("gridContainer");
+                    gridContainer.style.display = "grid";
+                });
             }
 
             fetch('games.json')
