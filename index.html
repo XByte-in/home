@@ -135,6 +135,27 @@
     <script>
         const iframeAspectRatio = 5 / 3;
         let mode = "view"
+
+        function openFullscreen() {
+            if (document.requestFullscreen) {
+                document.requestFullscreen();
+            } else if (document.webkitRequestFullscreen) { /* Safari */
+                document.webkitRequestFullscreen();
+            } else if (document.msRequestFullscreen) { /* IE11 */
+                document.msRequestFullscreen();
+            }
+        }
+
+        function closeFullscreen() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+            }
+
         function updateIFramePosition() {
             const gameElement = document.getElementById("game");
             if (gameElement) {
@@ -173,7 +194,6 @@
             filteredGames.forEach(appendData);
 
         }
-
         window.onload = () => {
             const searchParams = new URLSearchParams(window.location.search);
             let gameUrl = searchParams.get("game_url");
@@ -182,12 +202,15 @@
                 gameUrl = decodeURIComponent(gameUrl);
             }
             if (mode === "play") {
+                openFullscreen(); 
                 const gameElement = document.getElementById("game");
                 gameElement.src = gameUrl;
                 gameElement.style.display = "block";
                 updateIFramePosition();
+                
                 window.addEventListener("resize", updateIFramePosition);
             } else if (mode === "view") {
+                closeFullscreen() 
                 const gridContainer = document.getElementById("gridContainer");
                 gridContainer.style.display = "grid";
             }
@@ -203,6 +226,7 @@
         }
         let timeOutId = null;
         function onSearch(event) {
+            mode === "view";
             window.history.pushState({}, "", window.location.origin + window.location.pathname);
 
             const gameElement = document.getElementById("game");
@@ -211,8 +235,6 @@
 
             const gridContainer = document.getElementById("gridContainer");
             gridContainer.style.display = "grid";
-
-
 
             clearTimeout(timeOutId)
             timeOutId = setTimeout(() => setUpAutoComplete(event.target.value), 500);
